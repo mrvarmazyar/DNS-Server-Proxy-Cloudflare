@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dns-server
+  labels:
+    app: dns-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dns-server
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: dns-server
+    spec:
+      containers:
+      - image: varmazyar/dns-server
+        name: dns-server
+        ports:
+        - containerPort: 53
